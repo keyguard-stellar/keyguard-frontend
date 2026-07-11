@@ -14,7 +14,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background bg-vault-grid">
-      <div className="mx-auto flex min-h-screen max-w-[1440px]">
+      <div className="mx-auto flex min-h-screen max-w-7xl">
         <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar/60 backdrop-blur md:flex">
           <Link
             href="/"
