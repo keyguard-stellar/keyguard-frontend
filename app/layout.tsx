@@ -1,13 +1,23 @@
 import type { Metadata } from "next";
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/epilogue/400.css";
+import "@fontsource/epilogue/500.css";
+import "@fontsource/epilogue/600.css";
+import "@fontsource/epilogue/700.css";
+import "@fontsource/epilogue/800.css";
+import "@fontsource/martian-mono/400.css";
+import "@fontsource/martian-mono/500.css";
+import "@fontsource/martian-mono/600.css";
+import "@fontsource/martian-mono/700.css";
 import "./globals.css";
-import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import { AppProviders } from "@/components/providers/app-providers";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Keyguard App",
-  description: "Next.js 14 + Tailwind v4 + shadcn/ui",
+  title: "KeyGuard — Self-custody you can't lose",
+  description:
+    "Multi-signature key management and guardian-based account recovery, enforced on the Stellar blockchain.",
 };
 
 export default function RootLayout({
@@ -16,8 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>{children}</body>
+    <html lang="en" className={cn("dark scheme-dark")} suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <AppProviders>
+          {children}
+          <Toaster />
+        </AppProviders>
+      </body>
     </html>
   );
 }
