@@ -106,7 +106,7 @@ export default function GuardiansPage() {
             <button
               key={`empty-${i}`}
               onClick={() => setAddOpen(true)}
-              className="flex min-h-[148px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+              className="flex min-h-37 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
             >
               <Plus className="size-5" />
               <span className="text-xs font-medium">Add guardian slot</span>
