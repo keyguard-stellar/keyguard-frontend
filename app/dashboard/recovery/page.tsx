@@ -32,7 +32,11 @@ export default function RecoveryPage() {
 
   return (
     <div>
-    
+      <PageHeader
+        eyebrow="Account Recovery"
+        title="Recovery Wizard"
+        description="Lost a key? Guardians co-sign the replacement — no support ticket, no black box, just majority approval on-chain."
+      />
 
       {activeGuardians.length < 2 && !isActive && (
         <Card className="mb-6 border-status-pending/30 bg-status-pending-bg/40">
