@@ -1,4 +1,4 @@
-# KeyGuard Frontend
+# KeyGuard Frontend/App
 
 Multi-signature key management and guardian-based recovery UI for Stellar, built with
 Next.js 14 (App Router), TypeScript, Tailwind CSS v4, and Freighter wallet integration.
