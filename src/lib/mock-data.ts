@@ -7,9 +7,17 @@ import {
 } from "@/lib/types";
 import { mockTxHash } from "@/lib/utils";
 
+// Seed data used to populate a brand-new vault the first time a wallet
+// address connects (see vault-context.tsx). None of this is persisted
+// anywhere real — it exists purely so the UI has something believable to
+// render before there's an actual keyguard-api / Soroban contract behind it.
+
 const DAY = 1000 * 60 * 60 * 24;
 const now = () => Date.now();
 
+// The connected wallet's own address is always seeded in as the "Primary"
+// key. Everything else (backup, trading, a retired key) is fabricated to
+// give the Key Registry page a realistic mix of active/revoked entries.
 export function seedKeys(primaryAddress: string): RegisteredKey[] {
   return [
     {
@@ -51,6 +59,9 @@ export function seedKeys(primaryAddress: string): RegisteredKey[] {
   ];
 }
 
+// Default multi-sig setup: a 2-of-3 threshold (the seeded primary key plus
+// these two co-signers), matching the "Hardware Backup" key above so the
+// Multi-Sig and Key Registry pages feel like the same coherent account.
 export function seedMultiSig(): MultiSigConfig {
   return {
     threshold: 2,
@@ -72,6 +83,8 @@ export function seedMultiSig(): MultiSigConfig {
   };
 }
 
+// Three guardians (below the max of 5), all "active" so the Recovery wizard
+// has enough guardians to actually demo a majority-approval flow out of the box.
 export function seedGuardians(): Guardian[] {
   const day = 1000 * 60 * 60 * 24;
   return [
@@ -99,10 +112,18 @@ export function seedGuardians(): Guardian[] {
   ];
 }
 
+// No recovery in progress for a fresh vault. Kept as a function (rather than
+// just `null` inline in vault-context) so the seeding API stays consistent —
+// every piece of seed state has a `seedX()` entry point.
 export function seedRecovery(): RecoveryRequest | null {
   return null;
 }
 
+// Backdated audit trail so the Overview and Audit Log pages don't look empty
+// on a brand-new vault. Ordering/timestamps roughly tell a story: guardians
+// and signers were set up ~3-4 weeks ago, keys were added along the way, and
+// the old phone key was revoked further back. `txHash` is null only for the
+// one purely off-chain event (session auth); everything else gets a mock hash.
 export function seedAuditLog(primaryAddress: string): AuditEvent[] {
   const day = 1000 * 60 * 60 * 24;
   return [
